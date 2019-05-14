@@ -127,11 +127,14 @@ class NeuralNetwork:
 			self.errori.append(copy.deepcopy(row))
 
 	def show(self):
+		""" To print weight matrix """
 		for row in self.wmatrix:
 			for col in row:
 				print(col)
 
 	def predict_class(self):
+		""" Rounds all the values in the output layer of the activation matrix -
+		this really only works for netorks with one node in the output layer. """
 		ajsum = 0
 		for item in self.ajmatrix[-1]:
 			ajsum += item
@@ -214,7 +217,7 @@ def main():
             forwardpropagate(net, example, [inputs, 4, 1])
             backpropagate(net, example, [inputs, 4, 1])
     print(accuracy(net, training))
-    
+
     """
     #For 3 bit incrementer
     for i in range(10000):
