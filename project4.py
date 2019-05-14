@@ -1,7 +1,10 @@
 """
-PLEASE DOCUMENT HERE
-
+Julia Opatrny
+Project 4: Classification with Neural Networks
 Usage: python3 project3.py DATASET.csv
+
+This program creates a neural network, and does forward propagation and back propagation
+on the layers and hidden layers to adjust weights and predict outcomes
 """
 
 import csv, sys, random, math, copy
@@ -56,10 +59,8 @@ def accuracy(nn, pairs):
     predict_class method, which gives the predicted class for the last run
     forward_propagate. Also assumes that the y-values only have a single
     element, which is the predicted class.
-
     Optionally, you can implement the get_outputs method and uncomment the code
     below, which will let you see which outputs it is getting right/wrong.
-
     Note: this will not work for non-classification problems like the 3-bit
     incrementer."""
 
@@ -133,21 +134,11 @@ class NeuralNetwork:
 
 
 def forwardpropagate(network, example, layers):
-	#print("INJ", network.injmatrix)
+	""" Propagates inputs forward to compute outputs"""
 	nodes = network.nodes
-	#print(network.ajmatrix)
-	#for ex in examples:
-	#inputlayer = []
-	#forward propagate
+
 	for i in range(len(example[0])):
 		network.ajmatrix[0][i] = example[0][i]
-	#ai = xi for each node in input layer
-	#network.ajmatrix[0] = inputlayer
-	#print("+++LENGTH", len(network.wmatrix))
-	#print("*********", network.layermatrix)
-	#print("HERE WE GO", network.wmatrix)
-	#print("&&&&&", layers)
-	#print(network.ajmatrix)
 
 	for l in range(1, len(layers)):
 		for j in range(layers[l]):
@@ -295,7 +286,6 @@ def backpropagate(network, example, layers):
 			#	print("2", network.ajmatrix[i][j])
 			#	print("3", network.injmatrix[i][j])
 				network.wmatrix[i][j][n] = network.wmatrix[i][j][n] + 0.1 * network.ajmatrix[i-1][j] * network.injmatrix[i][j]
-
 			#network.injmatrix[l][i] =
 	"""
 
@@ -351,7 +341,6 @@ for i in range(1, layers):
 
 
 """
-
 class NeuralNetwork:
 	def __init__(self, attributes, target):
 		self.a0 = attributes[0]
@@ -361,11 +350,9 @@ class NeuralNetwork:
 		self.w0 = 1.0
 		self.w1 = random.randrange(1)
 		self.w2 = random.randrange(1)
-
 class InputNode(NeuralNetwork):
 	def __init__(self):
 		pass
-
 def backpropagate(network):
 	pass
 	#pass how many layers, how many nodes per layer
@@ -394,7 +381,7 @@ def main():
     #print(inputs)
     inputs = len(training[0][0])
     #print("LENGTH", inputs)
-    net = NeuralNetwork([inputs, 6, 3])
+    net = NeuralNetwork([inputs, 4, 1])
 
 
     #print(chunks(training, 5))
@@ -407,15 +394,14 @@ def main():
     #for i in range(100):
     #for i in range(100):
     #	for example in training:
-    """
-    for i in range(10000):
-    	for example in training:
-		forwardpropagate(net, example, [inputs, 4, 1])
-		backpropagate(net, example, [inputs, 4, 1])
-	"""
+    for i in range(100):
+        for example in training:
+            forwardpropagate(net, example, [inputs, 4, 1])
+            backpropagate(net, example, [inputs, 4, 1])
+    print(accuracy(net, training))
     """
     #For 3 bit incrementer
-	for i in range(10000):
+    for i in range(10000):
        for example in training:
            forwardpropagate(net, example, [inputs, 6, 3])
            backpropagate(net, example, [inputs, 6, 3])
