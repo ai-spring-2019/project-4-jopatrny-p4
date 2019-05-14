@@ -4,7 +4,17 @@ Project 4: Classification with Neural Networks
 Usage: python3 project3.py DATASET.csv
 
 This program creates a neural network, and does forward propagation and back propagation
-on the layers and hidden layers to adjust weights and predict outcomes
+on the layers and hidden layers to adjust weights and predict outcomes.
+
+To run: create a NeuralNetwork object by passing a list containing
+the number of nodes per layer.
+For instance, to create a 3x6x3 Neural Network:
+net = NeuralNetwork([3, 6, 3])
+
+Run front propagation and back propagation on the inputs however many times you like like so:
+for example in training:
+	frontpropagation(net, example, [3, 6, 3])
+	backpropagation(net, example, [3, 6, 3])
 """
 
 import csv, sys, random, math, copy
@@ -410,17 +420,6 @@ def main():
         backpropagate(net, training[n], [inputs, 6, 3])
         print("-----", n, "-----", training[n][1], net.ajmatrix[-1])
     """
-    #print("***", net.wmatrix)
-    #print()
-    #print()
-    #print(net.ajmatrix)
-    #print(net.wmatrix)
-    #print(net.ajmatrix)
-    #print(accuracy(net, training))
-
-    #for layer in net.layermatrix:
-    #	print(layer)
-
 
     ### I expect the running of your program will work something like this;
     ### this is not mandatory and you could have something else below entirely.
